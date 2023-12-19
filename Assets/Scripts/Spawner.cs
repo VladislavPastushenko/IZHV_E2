@@ -18,12 +18,12 @@ public class Spawner : MonoBehaviour
     /// <summary>
     /// Mean frequency of spawning as n per second.
     /// </summary>
-    public float spawnFrequencyMean = 1.0f;
+    private float spawnFrequencyMean = 2.0f;
     
     /// <summary>
     /// Standard deviation of the frequency of spawning as n per second.
     /// </summary>
-    public float spawnFrequencyStd = 0.5f;
+    private float spawnFrequencyStd = 1.0f;
     
     /// <summary>
     /// Position offset of the spawned obstacles.
@@ -86,16 +86,19 @@ public class Spawner : MonoBehaviour
     {
         // Spawn the obstacle.
         var obstacle = Instantiate(obstaclePrefab, transform);
+  
+        var randomSpawnSize = spawnSize - (Random.value * 0.5f);
 
         // Move it to the target location.
         var spawnDown = RandomBool();
         obstacle.transform.position += (Vector3)(spawnDown ? 
-            spawnOffset + (1.0f - spawnSize) / 2.0f : 
-            -spawnOffset - (1.0f - spawnSize) / 2.0f
+            spawnOffset + (1.0f - randomSpawnSize) / 2.0f : 
+            -spawnOffset - (1.0f - randomSpawnSize) / 2.0f
         );
         
+
         // Scale it.
-        obstacle.transform.localScale = new Vector3(spawnSize, spawnSize, spawnSize);
+        obstacle.transform.localScale = new Vector3(randomSpawnSize, randomSpawnSize, spawnSize);
         
         // Move the obstacle into the correct layer.
         obstacle.layer = LayerMask.NameToLayer(spawnLayer);

@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Speed of rotation animation in degrees.
     /// </summary>
-    public float rotationSpeed = 30.0f;
+    public float rotationSpeed = 15.0f;
 
     /// <summary>
     /// Which axes should be rotated?
